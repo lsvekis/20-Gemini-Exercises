@@ -1,0 +1,171 @@
+/**
+ * Setup the current Google Doc with sample content
+ * for all Gemini AI examples.
+ *
+ * Run this once in a fresh Doc:
+ *  - Open Extensions → Apps Script
+ *  - Add this function to DocsExamples.gs (or a new file)
+ *  - Run setupGeminiDocsDemo()
+ */
+function setupGeminiDocsDemo() {
+  const doc = DocumentApp.getActiveDocument();
+  const body = doc.getBody();
+
+  // Clear existing content
+  body.clear();
+
+  // Title
+  body.appendParagraph('Gemini AI – Google Docs Demo')
+    .setHeading(DocumentApp.ParagraphHeading.TITLE);
+
+  body.appendParagraph(
+    'This document is pre-filled with sample content for testing the "Gemini AI" menu tools. ' +
+    'Select the indicated sections and run the matching Gemini AI action from the menu.'
+  ).setSpacingAfter(18);
+
+  // Section 1 – Summarize
+  body.appendParagraph('1. Summarize Selected Text')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Summarize selection". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'JavaScript is one of the most widely-used programming languages in the world, ' +
+    'powering both small interactive widgets and large-scale web applications. ' +
+    'Because it runs in the browser, JavaScript allows developers to build ' +
+    'interfaces that respond instantly to user actions, without needing to reload ' +
+    'the entire page from the server.'
+  ).setSpacingAfter(18);
+
+  // Section 2 – Rewrite simpler
+  body.appendParagraph('2. Rewrite Text in Simpler Language')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Rewrite simpler (Grade 6)". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'The institution seeks to foster interdisciplinary collaboration by encouraging ' +
+    'departments to adopt a more holistic approach to curriculum design. ' +
+    'This involves integrating perspectives from multiple fields, aligning learning ' +
+    'outcomes with real-world challenges, and continuously evaluating the impact on students.'
+  ).setSpacingAfter(18);
+
+  // Section 3 – Outline from topic
+  body.appendParagraph('3. Generate Outline From Topic')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Generate outline from topic". ' +
+    'When prompted, enter a topic such as "Intro to Google Apps Script".'
+  ).setItalic(true);
+  body.appendParagraph(
+    'Use this section to test how Gemini breaks a topic into sections and subpoints. ' +
+    'You can repeat the command with different topics to compare outlines.'
+  ).setSpacingAfter(18);
+
+  // Section 4 – Quiz from selection
+  body.appendParagraph('4. Create Quiz From Selected Text')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Create quiz from selection". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'Cloud computing allows organizations to access computing resources—such as servers, ' +
+    'storage, databases, and software—over the internet instead of maintaining physical ' +
+    'hardware on-site. This model can reduce upfront costs, make it easier to scale up ' +
+    'or down based on demand, and enable teams to collaborate from different locations.'
+  ).setSpacingAfter(18);
+
+  // Section 5 – Suggest comment
+  body.appendParagraph('5. Suggest Writing Comment')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Suggest writing comment". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'This paragraph is kind of messy and maybe a bit too casual for a formal document, ' +
+    'because it mixes different ideas without much structure and doesn\'t really explain ' +
+    'why any of them are important, which might confuse some readers.'
+  ).setSpacingAfter(18);
+
+  // Section 6 – Expand selection
+  body.appendParagraph('6. Expand Selection With More Detail')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Expand selection (more detail)". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'Regular practice is one of the most effective ways to learn programming. ' +
+    'Short, focused sessions can be more helpful than long, infrequent study marathons.'
+  ).setSpacingAfter(18);
+
+  // Section 7 – Professional tone
+  body.appendParagraph('7. Rewrite in Professional Tone')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Rewrite in professional tone". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'Hey, I just threw this together really fast, so it\'s not super polished. ' +
+    'We can clean it up later if we need to, but for now it should be fine.'
+  ).setSpacingAfter(18);
+
+  // Section 8 – Title ideas
+  body.appendParagraph('8. Generate Title Ideas')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Generate title ideas". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'This article explains how teams can use automation and AI tools to streamline ' +
+    'repetitive tasks, reduce errors, and free up time for more creative and strategic work.'
+  ).setSpacingAfter(18);
+
+  // Section 9 – Bullet takeaways
+  body.appendParagraph('9. Key Bullet Takeaways From Selection')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Key bullet takeaways from selection". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'When planning a course, it is important to define clear learning outcomes, align ' +
+    'assessments with those outcomes, and provide opportunities for students to practice ' +
+    'new skills. Regular feedback, accessible resources, and varied teaching strategies ' +
+    'can significantly improve student engagement and success.'
+  ).setSpacingAfter(18);
+
+  // Section 10 – Proofreading
+  body.appendParagraph('10. Proofread & Suggest Improvements')
+    .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  body.appendParagraph(
+    'Try this with: Gemini AI → "Proofread & suggest improvements". ' +
+    'Highlight the paragraph below first.'
+  ).setItalic(true);
+
+  body.appendParagraph(
+    'This sentence have a few problem and it doesn\'t really flow that well, ' +
+    'because the grammar are off and the ideas isn\'t totally clear, so it kind of ' +
+    'makes the reader stop and think what is actually being said.'
+  ).setSpacingAfter(24);
+
+  // Footer note
+  body.appendParagraph(
+    'Tip: Experiment with different texts in each section to see how Gemini responds. ' +
+    'You can overwrite these samples with your own real content.'
+  ).setItalic(true);
+}
