@@ -1,0 +1,157 @@
+/**
+ * Run a full end-to-end test of all Gemini Sheets examples.
+ *
+ * REQUIREMENTS:
+ *  - SharedHelpers.gs, SheetsExamples.gs, SheetsMenu.gs are in the project.
+ *  - setupGeminiSheetsDemo() exists and populates the sheet with sample data.
+ *
+ * This will:
+ *  1. Reset and populate demo data.
+ *  2. Create a sample formula and set it as the active cell.
+ *  3. Call every Gemini-powered function once.
+ *
+ * Check:
+ *  - The sheet for updated values.
+ *  - Dialogs/popups for explanations, where applicable.
+ *  - Logs (View → Logs) for progress messages.
+ */
+function testAllGeminiSheets() {
+  const sheet = getActiveSheetOrError_();
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  ss.setActiveSheet(sheet);
+
+  Logger.log('=== Step 1: Setup demo data ===');
+  setupGeminiSheetsDemo();
+
+  // ----------------------------------------------------
+  // Prepare a sample formula for sheets_explainActiveFormula
+  // ----------------------------------------------------
+  Logger.log('Preparing sample formula in E2 for explainActiveFormula...');
+  sheet.getRange('E1')
+    .setValue('Sample formula for testing')
+    .setFontWeight('bold');
+  sheet.getRange('E2').setFormula('=SUM(1, 2, 3)');
+  sheet.setActiveSelection(sheet.getRange('E2'));
+
+  Logger.log('Running sheets_explainActiveFormula()...');
+  sheets_explainActiveFormula();
+
+  // ----------------------------------------------------
+  // Idea generators - use topic in A1
+  // ----------------------------------------------------
+  Logger.log('Running sheets_topicIdeas()...');
+  sheets_topicIdeas();
+
+  Logger.log('Running sheets_topicIdeasPerRow()...');
+  sheets_topicIdeasPerRow();
+
+  // ----------------------------------------------------
+  // Translate A2:A → B2:B
+  // (You may get a language prompt dialog)
+  // ----------------------------------------------------
+  Logger.log('Running sheets_translateAtoB()...');
+  sheets_translateAtoB();
+
+  // ----------------------------------------------------
+  // TODOs from notes in A1
+  // Temporarily override A1 with a note-style summary.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_todosFromNotes()...');
+  const originalA1_forTODO = sheet.getRange('A1').getValue();
+  sheet
+    .getRange('A1')
+    .setValue(
+      'Discuss project delays, dark mode feature request, and recent billing issues with the team.'
+    );
+  sheets_todosFromNotes();
+  sheet.getRange('A1').setValue(originalA1_forTODO);
+
+  // ----------------------------------------------------
+  // Email draft from A1/B1/C1 → D1
+  // Demo data already in F2:H2, but our function expects A1/B1/C1?
+  // If your implementation uses F2:H2, adjust this section as needed.
+  // Here we copy F2:H2 into A1:C1 temporarily.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_emailDraftFromInputs()...');
+  const f2 = sheet.getRange('F2').getValue();
+  const g2 = sheet.getRange('G2').getValue();
+  const h2 = sheet.getRange('H2').getValue();
+
+  const originalA1_forEmail = sheet.getRange('A1').getValue();
+  const originalB1_forEmail = sheet.getRange('B1').getValue();
+  const originalC1_forEmail = sheet.getRange('C1').getValue();
+
+  sheet.getRange('A1').setValue(f2);
+  sheet.getRange('B1').setValue(g2);
+  sheet.getRange('C1').setValue(h2);
+
+  sheets_emailDraftFromInputs();
+
+  // Restore original A1–C1
+  sheet.getRange('A1').setValue(originalA1_forEmail);
+  sheet.getRange('B1').setValue(originalB1_forEmail);
+  sheet.getRange('C1').setValue(originalC1_forEmail);
+
+  // ----------------------------------------------------
+  // Meeting summary from A2:A10 → B1
+  // Uses the feedback items set up in the demo.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_meetingSummaryFromRange()...');
+  sheets_meetingSummaryFromRange();
+
+  // ----------------------------------------------------
+  // Tutor answer from A1 question → B1
+  // Temporarily set A1 to a question.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_tutorAnswerFromQuestion()...');
+  const originalA1_forTutor = sheet.getRange('A1').getValue();
+  sheet
+    .getRange('A1')
+    .setValue('What is cloud computing and why is it useful?');
+  sheets_tutorAnswerFromQuestion();
+  sheet.getRange('A1').setValue(originalA1_forTutor);
+
+  // ----------------------------------------------------
+  // Categorize A2:A → B2:B
+  // ----------------------------------------------------
+  Logger.log('Running sheets_categorizeAtoB()...');
+  sheets_categorizeAtoB();
+
+  // ----------------------------------------------------
+  // Summarize notes A2:A → B2:B
+  // ----------------------------------------------------
+  Logger.log('Running sheets_summarizeNotesAtoB()...');
+  sheets_summarizeNotesAtoB();
+
+  // ----------------------------------------------------
+  // Keywords from A2:A → B2:B
+  // ----------------------------------------------------
+  Logger.log('Running sheets_keywordsFromAtoB()...');
+  sheets_keywordsFromAtoB();
+
+  // ----------------------------------------------------
+  // Suggest headers from topic in A13 → row 2
+  // We copy the demo topic from A13 into A1 temporarily
+  // because sheets_suggestHeadersFromTopic() expects A1.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_suggestHeadersFromTopic()...');
+  const originalA1_forHeaders = sheet.getRange('A1').getValue();
+  const topicForHeaders = sheet.getRange('A13').getValue();
+  sheet.getRange('A1').setValue(topicForHeaders);
+  sheets_suggestHeadersFromTopic();
+  sheet.getRange('A1').setValue(originalA1_forHeaders);
+
+  // ----------------------------------------------------
+  // Generate formula from description in A1 → B1
+  // Temporarily write a formula description into A1.
+  // ----------------------------------------------------
+  Logger.log('Running sheets_generateFormulaFromDescription()...');
+  const originalA1_forFormula = sheet.getRange('A1').getValue();
+  sheet
+    .getRange('A1')
+    .setValue('Sum all values in C2:C where B2:B equals "Paid".');
+  sheets_generateFormulaFromDescription();
+  sheet.getRange('A1').setValue(originalA1_forFormula);
+
+  Logger.log('=== Done: testAllGeminiSheets completed. Check the Sheet and dialogs for results. ===');
+}
