@@ -1,0 +1,60 @@
+function setupGeminiSheetsDemo() {
+  const sheet = getActiveSheetOrError_();
+  sheet.clear();
+
+  // Title topic
+  sheet.getRange("A1")
+    .setValue("Project management improvements")
+    .setBackground("#d9ead3")
+    .setFontWeight("bold");
+
+  sheet.getRange("B1").setValue("Gemini Output");
+
+  // Sample items for A2:A10
+  const sampleList = [
+    ["User reports slow loading times on dashboard"],
+    ["Request to add dark mode theme to UI"],
+    ["Billing issue: invoice shows incorrect amount"],
+    ["Customer unable to reset password via mobile app"],
+    ["Feedback: onboarding process is confusing"],
+    ["Bug: notifications not appearing for new messages"],
+    ["Idea: implement weekly analytics summary email"],
+    ["Question: how to export data in CSV format"],
+    ["Support needed: user cannot access shared folder"]
+  ];
+  sheet.getRange(2, 1, sampleList.length, 1)
+    .setValues(sampleList)
+    .setBackground("#fff2cc");
+
+  // Meeting notes
+  sheet.getRange("D1").setValue("Meeting Notes").setFontWeight("bold");
+  sheet.getRange("D2").setValue("Improve load time by optimizing database queries.");
+  sheet.getRange("D3").setValue("Add dark mode as a Q3 UI enhancement.");
+  sheet.getRange("D4").setValue("Fix invoice calculation bug.");
+  sheet.getRange("D5").setValue("Simplify onboarding documentation.");
+
+  // Email drafting inputs
+  sheet.getRange("F1").setValue("Topic:");
+  sheet.getRange("G1").setValue("Recipient:");
+  sheet.getRange("H1").setValue("Context:");
+  sheet.getRange("F2").setValue("Delay in project timeline");
+  sheet.getRange("G2").setValue("Project Manager");
+  sheet.getRange("H2").setValue("We need an update on expected testing completion.");
+
+  // Natural language → formula example
+  sheet.getRange("F5").setValue("Natural Language → Sheets Formula").setFontWeight("bold");
+  sheet.getRange("F6").setValue("Sum all values in C2:C where B2:B equals 'Paid'");
+
+  // Header suggestion topic
+  sheet.getRange("A12").setValue("Topic for header generation:");
+  sheet.getRange("A13")
+    .setValue("Customer support ticket tracking sheet")
+    .setBackground("#cfe2f3");
+
+  // Helper notes
+  sheet.getRange("A15").setValue(
+    "Demo Ready: Use the Gemini AI menu to test idea generation, categorization, translation, summarization, keywords, headers, formulas, email drafting, and meeting summaries."
+  );
+
+  sheet.autoResizeColumns(1, 8);
+}
